@@ -10,6 +10,7 @@ import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.umlg.sqlg.structure.PropertyType;
+import org.umlg.sqlg.structure.SchemaManager;
 import org.umlg.sqlg.structure.SchemaTable;
 import org.umlg.sqlg.structure.SqlgGraph;
 import org.umlg.sqlg.test.BaseTest;
@@ -93,10 +94,10 @@ public class TestLoadSchema extends BaseTest {
         this.sqlgGraph.close();
         this.sqlgGraph = SqlgGraph.open(configuration);
         Vertex vv = this.sqlgGraph.traversal().V(v.id()).next();
-        Assert.assertFalse(vv.property("ID").isPresent());
+        Assert.assertFalse(vv.property(SchemaManager.ID).isPresent());
         Map<String, PropertyType> propertyTypeMap = this.sqlgGraph.getSchemaManager().getAllTables().get(SchemaTable.of(
                 this.sqlgGraph.getSqlDialect().getPublicSchema(), "V_Person").toString());
-        Assert.assertFalse(propertyTypeMap.containsKey("ID"));
+        Assert.assertFalse(propertyTypeMap.containsKey(SchemaManager.ID));
         this.sqlgGraph.tx().rollback();
     }
 

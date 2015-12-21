@@ -10,6 +10,7 @@ import org.apache.tinkerpop.gremlin.process.traversal.util.OrP;
 import org.apache.tinkerpop.gremlin.structure.T;
 import org.umlg.sqlg.predicate.Text;
 import org.umlg.sqlg.sql.dialect.SqlDialect;
+import org.umlg.sqlg.structure.SchemaManager;
 import org.umlg.sqlg.structure.SqlgGraph;
 import org.umlg.sqlg.util.SqlgUtil;
 
@@ -39,7 +40,7 @@ public class WhereClause {
 
         if (p.getBiPredicate() instanceof Compare) {
             if (hasContainer.getKey().equals(T.id.getAccessor())) {
-                result += prefix + ".\"ID\"";
+                result += prefix + ".\"" + SchemaManager.ID + "\"";
             } else {
                 result += prefix + "." + sqlgGraph.getSqlDialect().maybeWrapInQoutes(hasContainer.getKey());
             }
@@ -47,7 +48,7 @@ public class WhereClause {
             return result;
         } else if ((!sqlgGraph.getSqlDialect().supportsBulkWithinOut() || (!SqlgUtil.isBulkWithinAndOut(sqlgGraph, hasContainer))) && p.getBiPredicate() instanceof Contains) {
             if (hasContainer.getKey().equals(T.id.getAccessor())) {
-                result += prefix + ".\"ID\"";
+                result += prefix + ".\"" + SchemaManager.ID + "\"";
             } else {
                 result += prefix + "." + sqlgGraph.getSqlDialect().maybeWrapInQoutes(hasContainer.getKey());
             }
@@ -63,7 +64,7 @@ public class WhereClause {
             P p1 = orP.getPredicates().get(0);
             String key;
             if (hasContainer.getKey().equals(T.id.getAccessor())) {
-                key = result + "\"ID\"";
+                key = result + "\"" + SchemaManager.ID + "\"";
             } else {
                 key = result + "." + sqlgGraph.getSqlDialect().maybeWrapInQoutes(hasContainer.getKey());
             }
@@ -193,7 +194,7 @@ public class WhereClause {
             List values = (List) hasContainer.getValue();
             for (Object value : values) {
                 if (hasContainer.getKey().equals(T.id.getAccessor())) {
-                    keyValueMap.put("ID", value);
+                    keyValueMap.put(SchemaManager.ID, value);
                 } else {
                     keyValueMap.put(hasContainer.getKey(), value);
                 }

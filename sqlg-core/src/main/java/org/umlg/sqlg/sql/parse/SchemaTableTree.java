@@ -688,7 +688,7 @@ public class SchemaTableTree {
             sb.append(sqlgGraph.getSqlDialect().maybeWrapInQoutes(this.getSchemaTable().getTable()));
             sb.append(".");
             if (hasContainer.getKey().equals(T.id.getAccessor())) {
-                sb.append(sqlgGraph.getSqlDialect().maybeWrapInQoutes("ID"));
+                sb.append(sqlgGraph.getSqlDialect().maybeWrapInQoutes(SchemaManager.ID));
             } else {
                 sb.append(sqlgGraph.getSqlDialect().maybeWrapInQoutes(hasContainer.getKey()));
             }
@@ -1153,7 +1153,7 @@ public class SchemaTableTree {
         Preconditions.checkArgument(schemaTableTree.getSchemaTable().isEdgeTable());
         sql += sqlgGraph.getSqlDialect().maybeWrapInQoutes(schemaTableTree.getSchemaTable().getSchema()) + "." +
                 sqlgGraph.getSqlDialect().maybeWrapInQoutes(schemaTableTree.getSchemaTable().getTable()) + "." +
-                sqlgGraph.getSqlDialect().maybeWrapInQoutes("ID");
+                sqlgGraph.getSqlDialect().maybeWrapInQoutes(SchemaManager.ID);
         sql += " AS " + sqlgGraph.getSqlDialect().maybeWrapInQoutes(schemaTableTree.calculatedAliasId());
         return sql;
     }
@@ -1531,7 +1531,7 @@ public class SchemaTableTree {
             joinSql += ".";
             joinSql += sqlgGraph.getSqlDialect().maybeWrapInQoutes(fromSchemaTable.getTable());
             joinSql += ".";
-            joinSql += sqlgGraph.getSqlDialect().maybeWrapInQoutes("ID");
+            joinSql += sqlgGraph.getSqlDialect().maybeWrapInQoutes(SchemaManager.ID);
             joinSql += " = ";
             joinSql += sqlgGraph.getSqlDialect().maybeWrapInQoutes(labelToTravers.getSchema());
             joinSql += ".";
@@ -1566,7 +1566,7 @@ public class SchemaTableTree {
             joinSql += ".";
             joinSql += sqlgGraph.getSqlDialect().maybeWrapInQoutes(labelToTravers.getTable());
             joinSql += ".";
-            joinSql += sqlgGraph.getSqlDialect().maybeWrapInQoutes("ID");
+            joinSql += sqlgGraph.getSqlDialect().maybeWrapInQoutes(SchemaManager.ID);
         }
         return joinSql;
     }

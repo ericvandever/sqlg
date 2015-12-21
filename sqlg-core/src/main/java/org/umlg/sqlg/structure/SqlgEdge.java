@@ -233,7 +233,7 @@ public class SqlgEdge extends SqlgElement implements Edge {
             sql.append(".");
             sql.append(this.sqlgGraph.getSqlDialect().maybeWrapInQoutes(SchemaManager.EDGE_PREFIX + this.table));
             sql.append(" WHERE ");
-            sql.append(this.sqlgGraph.getSqlDialect().maybeWrapInQoutes("ID"));
+            sql.append(this.sqlgGraph.getSqlDialect().maybeWrapInQoutes(SchemaManager.ID));
             sql.append(" = ?");
             if (this.sqlgGraph.getSqlDialect().needsSemicolon()) {
                 sql.append(";");
@@ -279,7 +279,7 @@ public class SqlgEdge extends SqlgElement implements Edge {
                 }
 //                name = name.replace(SchemaTableTree.ALIAS_SEPARATOR, ".");
 
-                if (!name.equals("ID") &&
+                if (!name.equals(SchemaManager.ID) &&
                         !Objects.isNull(o) &&
                         !name.endsWith(SchemaManager.OUT_VERTEX_COLUMN_END) &&
                         !name.endsWith(SchemaManager.IN_VERTEX_COLUMN_END)) {
@@ -320,7 +320,7 @@ public class SqlgEdge extends SqlgElement implements Edge {
             if (schemaTableTree.containsLabelledColumn(properName)) {
                 String name = schemaTableTree.propertyNameFromLabeledAlias(properName);
 
-                if (!name.equals("ID") &&
+                if (!name.equals(SchemaManager.ID) &&
                         !Objects.isNull(o) &&
                         !name.endsWith(SchemaManager.OUT_VERTEX_COLUMN_END) &&
                         !name.endsWith(SchemaManager.IN_VERTEX_COLUMN_END)) {
@@ -352,7 +352,7 @@ public class SqlgEdge extends SqlgElement implements Edge {
         for (int i = 1; i <= resultSetMetaData.getColumnCount(); i++) {
             String columnName = resultSetMetaData.getColumnLabel(i);
             Object o = resultSet.getObject(columnName);
-            if (!columnName.equals("ID") &&
+            if (!columnName.equals(SchemaManager.ID) &&
                     !Objects.isNull(o) &&
                     !columnName.endsWith(SchemaManager.OUT_VERTEX_COLUMN_END) &&
                     !columnName.endsWith(SchemaManager.IN_VERTEX_COLUMN_END)) {

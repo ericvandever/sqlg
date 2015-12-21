@@ -328,7 +328,7 @@ public class SqlgVertex extends SqlgElement implements Vertex {
                                 throw new IllegalStateException("BUG: in or out vertex id not set!!!!");
                             }
 
-                            Long edgeId = resultSet.getLong("ID");
+                            Long edgeId = resultSet.getLong(SchemaManager.ID);
                             Long inId = null;
                             Long outId = null;
 
@@ -370,7 +370,7 @@ public class SqlgVertex extends SqlgElement implements Vertex {
                             List<Object> keyValues = new ArrayList<>();
                             for (int i = 1; i <= resultSetMetaData.getColumnCount(); i++) {
                                 String columnName = resultSetMetaData.getColumnLabel(i);
-                                if (!((columnName.equals("ID") || columnName.equals(inVertexColumnNames) || columnName.equals(outVertexColumnNames)))) {
+                                if (!((columnName.equals(SchemaManager.ID) || columnName.equals(inVertexColumnNames) || columnName.equals(outVertexColumnNames)))) {
                                     keyValues.add(columnName);
                                     keyValues.add(resultSet.getObject(columnName));
                                 }
@@ -654,7 +654,7 @@ public class SqlgVertex extends SqlgElement implements Vertex {
                                 sql.append(" b ON a.");
                                 sql.append(this.sqlgGraph.getSqlDialect().maybeWrapInQoutes(joinSchemaTable.getSchema() + "." + joinSchemaTable.getTable() + SchemaManager.OUT_VERTEX_COLUMN_END));
                                 sql.append(" = b.");
-                                sql.append(this.sqlgGraph.getSqlDialect().maybeWrapInQoutes("ID"));
+                                sql.append(this.sqlgGraph.getSqlDialect().maybeWrapInQoutes(SchemaManager.ID));
                                 sql.append(" WHERE ");
                                 sql.append(this.sqlgGraph.getSqlDialect().maybeWrapInQoutes(this.schema + "." + this.table + SchemaManager.IN_VERTEX_COLUMN_END));
                                 sql.append(" = ? ");
@@ -685,7 +685,7 @@ public class SqlgVertex extends SqlgElement implements Vertex {
                                 sql.append(" b ON a.");
                                 sql.append(this.sqlgGraph.getSqlDialect().maybeWrapInQoutes(joinSchemaTable.getSchema() + "." + joinSchemaTable.getTable() + SchemaManager.IN_VERTEX_COLUMN_END));
                                 sql.append(" = b.");
-                                sql.append(this.sqlgGraph.getSqlDialect().maybeWrapInQoutes("ID"));
+                                sql.append(this.sqlgGraph.getSqlDialect().maybeWrapInQoutes(SchemaManager.ID));
                                 sql.append(" WHERE ");
                                 sql.append(this.sqlgGraph.getSqlDialect().maybeWrapInQoutes(this.schema + "." + this.table + SchemaManager.OUT_VERTEX_COLUMN_END));
                                 sql.append(" = ? ");
@@ -788,7 +788,7 @@ public class SqlgVertex extends SqlgElement implements Vertex {
                                 List<Object> keyValues = new ArrayList<>();
                                 for (int i = 1; i <= resultSetMetaData.getColumnCount(); i++) {
                                     String columnName = resultSetMetaData.getColumnLabel(i);
-                                    if (!(columnName.equals("ID") ||
+                                    if (!(columnName.equals(SchemaManager.ID) ||
                                             inVertexColumnNames.contains(columnName) || outVertexColumnNames.contains(columnName))) {
                                         //this values end up in SqlElement.properties.
                                         //Its a ConcurrentHashMap which does not allow null key or value
@@ -904,7 +904,7 @@ public class SqlgVertex extends SqlgElement implements Vertex {
             sql.append(".");
             sql.append(this.sqlgGraph.getSqlDialect().maybeWrapInQoutes(SchemaManager.VERTEX_PREFIX + this.table));
             sql.append(" WHERE ");
-            sql.append(this.sqlgGraph.getSqlDialect().maybeWrapInQoutes("ID"));
+            sql.append(this.sqlgGraph.getSqlDialect().maybeWrapInQoutes(SchemaManager.ID));
             sql.append(" = ?");
             if (this.sqlgGraph.getSqlDialect().needsSemicolon()) {
                 sql.append(";");
@@ -957,7 +957,7 @@ public class SqlgVertex extends SqlgElement implements Vertex {
                 }
 
                 Object o = resultSet.getObject(columnName);
-                if (!name.equals("ID")
+                if (!name.equals(SchemaManager.ID)
                         && !name.equals(SchemaManager.VERTEX_SCHEMA)
                         && !name.equals(SchemaManager.VERTEX_TABLE)
                         && !Objects.isNull(o)) {
@@ -980,7 +980,7 @@ public class SqlgVertex extends SqlgElement implements Vertex {
                 String name = schemaTableTree.propertyNameFromLabeledAlias(columnName);
 //                name = name.replace(SchemaTableTree.ALIAS_SEPARATOR, ".");
 
-                if (!name.endsWith("ID")
+                if (!name.endsWith(SchemaManager.ID)
                         && !name.equals(SchemaManager.VERTEX_SCHEMA)
                         && !name.equals(SchemaManager.VERTEX_TABLE)
                         && !Objects.isNull(o)) {
@@ -1005,7 +1005,7 @@ public class SqlgVertex extends SqlgElement implements Vertex {
         for (int i = 1; i <= resultSetMetaData.getColumnCount(); i++) {
             String columnName = resultSetMetaData.getColumnLabel(i);
             Object o = resultSet.getObject(columnName);
-            if (!columnName.equals("ID")
+            if (!columnName.equals(SchemaManager.ID)
                     && !columnName.equals(SchemaManager.VERTEX_SCHEMA)
                     && !columnName.equals(SchemaManager.VERTEX_TABLE)
                     && !Objects.isNull(o)) {

@@ -108,7 +108,7 @@ public abstract class SqlgElement implements Element {
         sql.append(".");
         sql.append(this.sqlgGraph.getSchemaManager().getSqlDialect().maybeWrapInQoutes((this instanceof Vertex ? SchemaManager.VERTEX_PREFIX : SchemaManager.EDGE_PREFIX) + this.table));
         sql.append(" WHERE ");
-        sql.append(this.sqlgGraph.getSchemaManager().getSqlDialect().maybeWrapInQoutes("ID"));
+        sql.append(this.sqlgGraph.getSchemaManager().getSqlDialect().maybeWrapInQoutes(SchemaManager.ID));
         sql.append(" = ?");
         if (this.sqlgGraph.getSqlDialect().needsSemicolon()) {
             sql.append(";");
@@ -209,7 +209,7 @@ public abstract class SqlgElement implements Element {
             sql.append(this.sqlgGraph.getSqlDialect().maybeWrapInQoutes(key));
             sql.append(" = ?");
             sql.append(" WHERE ");
-            sql.append(this.sqlgGraph.getSqlDialect().maybeWrapInQoutes("ID"));
+            sql.append(this.sqlgGraph.getSqlDialect().maybeWrapInQoutes(SchemaManager.ID));
             sql.append(" = ?");
             if (this.sqlgGraph.getSqlDialect().needsSemicolon()) {
                 sql.append(";");
@@ -486,7 +486,7 @@ public abstract class SqlgElement implements Element {
         Map<String, SqlgProperty<V>> properties = new HashMap<>();
         this.properties.entrySet().stream()
                 .filter(entry -> propertyKeys.length == 0 || Stream.of(propertyKeys).filter(k -> k.equals(entry.getKey())).findAny().isPresent())
-                .filter(entry -> !entry.getKey().equals("ID"))
+                .filter(entry -> !entry.getKey().equals(SchemaManager.ID))
                 .filter(entry -> entry.getValue() != null)
                 .forEach(entry -> properties.put(entry.getKey(), instantiateProperty(entry.getKey(), (V) entry.getValue())));
         return properties;
@@ -498,7 +498,7 @@ public abstract class SqlgElement implements Element {
         Map<String, SqlgProperty<V>> properties = new HashMap<>();
         this.properties.entrySet().stream()
                 .filter(entry -> propertyKeys.length == 0 || Stream.of(propertyKeys).filter(k -> k.equals(entry.getKey())).findAny().isPresent())
-                .filter(entry -> !entry.getKey().equals("ID"))
+                .filter(entry -> !entry.getKey().equals(SchemaManager.ID))
                 .filter(entry -> entry.getValue() != null)
                 .forEach(entry -> properties.put(entry.getKey(), instantiateProperty(entry.getKey(), (V) entry.getValue())));
         return properties;
@@ -511,7 +511,7 @@ public abstract class SqlgElement implements Element {
 
         this.properties.entrySet().stream()
                 .filter(entry -> propertyKeys.length == 0 || Stream.of(propertyKeys).filter(k -> k.equals(entry.getKey())).findAny().isPresent())
-                .filter(entry -> !entry.getKey().equals("ID"))
+                .filter(entry -> !entry.getKey().equals(SchemaManager.ID))
                 .filter(entry -> entry.getValue() != null)
                 .forEach(entry -> properties.put(entry.getKey(), instantiateProperty(entry.getKey(), (V) entry.getValue())));
 

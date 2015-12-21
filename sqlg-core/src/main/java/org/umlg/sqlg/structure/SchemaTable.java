@@ -121,7 +121,7 @@ public class SchemaTable implements DataSerializable, Serializable {
     public String getEmitEdgeId() {
         String emitEdgeId = this.getSchema();
         emitEdgeId += "." + this.getTable();
-        emitEdgeId += "." + "ID";
+        emitEdgeId += "." + SchemaManager.ID;
         return emitEdgeId;
     }
 

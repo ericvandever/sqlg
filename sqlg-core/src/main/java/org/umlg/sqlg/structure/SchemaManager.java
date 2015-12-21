@@ -597,7 +597,7 @@ public class SchemaManager {
         sql.append(".");
         sql.append(this.sqlDialect.maybeWrapInQoutes(tableName));
         sql.append(" (");
-        sql.append(this.sqlDialect.maybeWrapInQoutes("ID"));
+        sql.append(this.sqlDialect.maybeWrapInQoutes(SchemaManager.ID));
         sql.append(" ");
         sql.append(this.sqlDialect.getAutoIncrementPrimaryKeyConstruct());
         if (columns.size() > 0) {
@@ -653,7 +653,7 @@ public class SchemaManager {
         sql.append(".");
         sql.append(this.sqlDialect.maybeWrapInQoutes(tableName));
         sql.append("(");
-        sql.append(this.sqlDialect.maybeWrapInQoutes("ID"));
+        sql.append(this.sqlDialect.maybeWrapInQoutes(SchemaManager.ID));
         sql.append(" ");
         sql.append(this.sqlDialect.getAutoIncrementPrimaryKeyConstruct());
         if (columns.size() > 0) {
@@ -679,7 +679,7 @@ public class SchemaManager {
             sql.append(".");
             sql.append(this.sqlDialect.maybeWrapInQoutes(VERTEX_PREFIX + foreignKeyIn.getTable()));
             sql.append(" (");
-            sql.append(this.sqlDialect.maybeWrapInQoutes("ID"));
+            sql.append(this.sqlDialect.maybeWrapInQoutes(SchemaManager.ID));
             sql.append("), ");
             sql.append(" FOREIGN KEY (");
             sql.append(this.sqlDialect.maybeWrapInQoutes(foreignKeyOut.getSchema() + "." + foreignKeyOut.getTable() + SchemaManager.OUT_VERTEX_COLUMN_END));
@@ -688,7 +688,7 @@ public class SchemaManager {
             sql.append(".");
             sql.append(this.sqlDialect.maybeWrapInQoutes(VERTEX_PREFIX + foreignKeyOut.getTable()));
             sql.append(" (");
-            sql.append(this.sqlDialect.maybeWrapInQoutes("ID"));
+            sql.append(this.sqlDialect.maybeWrapInQoutes(SchemaManager.ID));
             sql.append(")");
         }
         //foreign key definition end
@@ -733,7 +733,7 @@ public class SchemaManager {
         StringBuilder sql = new StringBuilder(this.sqlDialect.createTemporaryTableStatement());
         sql.append(this.sqlDialect.maybeWrapInQoutes(tableName));
         sql.append("(");
-        sql.append(this.sqlDialect.maybeWrapInQoutes("ID"));
+        sql.append(this.sqlDialect.maybeWrapInQoutes(SchemaManager.ID));
         sql.append(" ");
         sql.append(this.sqlDialect.getAutoIncrementPrimaryKeyConstruct());
         if (columns.size() > 0) {
@@ -765,7 +765,7 @@ public class SchemaManager {
         sql.append(".");
         sql.append(this.sqlDialect.maybeWrapInQoutes(tableName));
         sql.append("(");
-        sql.append(this.sqlDialect.maybeWrapInQoutes("ID"));
+        sql.append(this.sqlDialect.maybeWrapInQoutes(SchemaManager.ID));
         sql.append(" ");
         sql.append(this.sqlDialect.getAutoIncrementPrimaryKeyConstruct());
         if (columns.size() > 0) {

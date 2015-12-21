@@ -1095,7 +1095,7 @@ public class SqlgGraph implements Graph {
                     }
                     sql.append(schemaTable.getTable());
                     sql.append("\" WHERE ");
-                    sql.append(this.sqlDialect.maybeWrapInQoutes("ID"));
+                    sql.append(this.sqlDialect.maybeWrapInQoutes(SchemaManager.ID));
                     sql.append(" IN (");
                     int count = 1;
                     for (Long id : schemaTableIds) {
@@ -1116,7 +1116,7 @@ public class SqlgGraph implements Graph {
                         statement.execute(sql.toString());
                         ResultSet resultSet = statement.getResultSet();
                         while (resultSet.next()) {
-                            long id = resultSet.getLong("ID");
+                            long id = resultSet.getLong(SchemaManager.ID);
                             SqlgElement sqlgElement;
                             if (returnVertices) {
                                 sqlgElement = SqlgVertex.of(this, id, schemaTable.getSchema(), schemaTable.getTable());
@@ -1154,7 +1154,7 @@ public class SqlgGraph implements Graph {
                         statement.execute(sql.toString());
                         ResultSet resultSet = statement.getResultSet();
                         while (resultSet.next()) {
-                            long id = resultSet.getLong("ID");
+                            long id = resultSet.getLong(SchemaManager.ID);
                             SqlgElement sqlgElement;
                             if (returnVertices) {
                                 sqlgElement = SqlgVertex.of(this, id, schemaTable.getSchema(), schemaTable.getTable().substring(SchemaManager.VERTEX_PREFIX.length()));

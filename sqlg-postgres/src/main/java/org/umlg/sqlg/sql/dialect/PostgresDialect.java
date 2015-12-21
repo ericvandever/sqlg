@@ -304,7 +304,7 @@ public class PostgresDialect extends BaseSqlDialect implements SqlDialect {
                 }
             }
             sql.append("\n) AS v(id, \"VERTEX_SCHEMA\", \"VERTEX_TABLE\", \"IN_LABELS\", \"OUT_LABELS\")");
-            sql.append("\nWHERE a.\"ID\" = v.id");
+            sql.append("\nWHERE a.\"" + SchemaManager.ID + "\" = v.id");
             if (logger.isDebugEnabled()) {
                 logger.debug(sql.toString());
             }
@@ -457,7 +457,7 @@ public class PostgresDialect extends BaseSqlDialect implements SqlDialect {
                 }
             }
             sql.append(")");
-            sql.append("\nWHERE a.\"ID\" = v.id");
+            sql.append("\nWHERE a.\"" + SchemaManager.ID + "\" = v.id");
             if (logger.isDebugEnabled()) {
                 logger.debug(sql.toString());
             }
@@ -686,7 +686,7 @@ public class PostgresDialect extends BaseSqlDialect implements SqlDialect {
                         sql.append(".");
                         sql.append(sqlgGraph.getSchemaManager().getSqlDialect().maybeWrapInQoutes((SchemaManager.VERTEX_PREFIX) + schemaTable.getTable()));
                         sql.append(" WHERE ");
-                        sql.append(sqlgGraph.getSchemaManager().getSqlDialect().maybeWrapInQoutes("ID"));
+                        sql.append(sqlgGraph.getSchemaManager().getSqlDialect().maybeWrapInQoutes(SchemaManager.ID));
                         sql.append(" in (");
                         int count = 1;
                         for (SqlgVertex sqlgVertex : subVertices) {
@@ -718,7 +718,7 @@ public class PostgresDialect extends BaseSqlDialect implements SqlDialect {
 //                        sql.append(".");
 //                        sql.append(sqlgGraph.getSqlDialect().maybeWrapInQoutes(SchemaManager.VERTICES));
 //                        sql.append(" WHERE ");
-//                        sql.append(sqlgGraph.getSqlDialect().maybeWrapInQoutes("ID"));
+//                        sql.append(sqlgGraph.getSqlDialect().maybeWrapInQoutes(SchemaManager.ID));
 //                        sql.append(" in (");
 //
 //                        count = 1;
@@ -907,7 +907,7 @@ public class PostgresDialect extends BaseSqlDialect implements SqlDialect {
                         sql.append(".");
                         sql.append(sqlgGraph.getSchemaManager().getSqlDialect().maybeWrapInQoutes((SchemaManager.EDGE_PREFIX) + schemaTable.getTable()));
                         sql.append(" WHERE ");
-                        sql.append(sqlgGraph.getSchemaManager().getSqlDialect().maybeWrapInQoutes("ID"));
+                        sql.append(sqlgGraph.getSchemaManager().getSqlDialect().maybeWrapInQoutes(SchemaManager.ID));
                         sql.append(" in (");
                         int count = 1;
                         for (SqlgEdge sqlgEdge : subEdges) {
@@ -1558,9 +1558,9 @@ public class PostgresDialect extends BaseSqlDialect implements SqlDialect {
         sql.append(",");
         sql.append(this.maybeWrapInQoutes(out.getSchema() + "." + out.getTable() + SchemaManager.IN_VERTEX_COLUMN_END));
         sql.append(") \n");
-        sql.append("select _in.\"ID\" as \"");
+        sql.append("select _in.\"" + SchemaManager.ID + "\" as \"");
         sql.append(in.getSchema() + "." + in.getTable() + SchemaManager.OUT_VERTEX_COLUMN_END);
-        sql.append("\", _out.\"ID\" as \"");
+        sql.append("\", _out.\"" + SchemaManager.ID + "\" as \"");
         sql.append(out.getSchema() + "." + out.getTable() + SchemaManager.IN_VERTEX_COLUMN_END);
         sql.append("\" FROM ");
         sql.append(this.maybeWrapInQoutes(in.getSchema()));
@@ -1678,7 +1678,7 @@ public class PostgresDialect extends BaseSqlDialect implements SqlDialect {
         sql.append("SELECT pg_get_serial_sequence('\"");
         sql.append(outSchemaTable.getSchema());
         sql.append("\".\"");
-        sql.append(prefix).append(outSchemaTable.getTable()).append("\"', 'ID')");
+        sql.append(prefix).append(outSchemaTable.getTable()).append("\"', '" + SchemaManager.ID + "')");
         if (logger.isDebugEnabled()) {
             logger.debug(sql.toString());
         }
