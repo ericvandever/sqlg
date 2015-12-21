@@ -243,7 +243,7 @@ public class ReplacedStep<S, E> {
     }
 
     private Set<SchemaTableTree> calculatePathFromVertexToEdge(SchemaTableTree schemaTableTree, SchemaTable labelToTravers, Direction direction) {
-        Preconditions.checkArgument(!labelToTravers.isVertexTable());
+        Preconditions.checkArgument(labelToTravers.isEdgeTable());
         Set<SchemaTableTree> result = new HashSet<>();
         Map<String, Set<String>> edgeForeignKeys = this.schemaManager.getAllEdgeForeignKeys();
         //join from the edge table to the incoming vertex table

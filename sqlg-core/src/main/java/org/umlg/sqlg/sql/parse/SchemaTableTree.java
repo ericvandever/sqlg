@@ -1500,8 +1500,8 @@ public class SchemaTableTree {
 
         //Assert that this is always from vertex to edge table or edge to vertex table
         Preconditions.checkState(
-                (fromSchemaTable.isVertexTable() && !labelToTravers.isVertexTable()) ||
-                        (!fromSchemaTable.isVertexTable() && labelToTravers.isVertexTable())
+                (fromSchemaTable.isVertexTable() && labelToTravers.isEdgeTable()) ||
+                        (fromSchemaTable.isEdgeTable() && labelToTravers.isVertexTable())
         );
 
         String rawLabel;

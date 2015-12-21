@@ -1029,7 +1029,7 @@ public class SqlgGraph implements Graph {
         Set<String> tables = this.getSchemaManager().getLocalTables().keySet();
         for (String table : tables) {
             SchemaTable schemaTable = SchemaTable.from(this, table, this.getSqlDialect().getPublicSchema());
-            if (returnVertices ? schemaTable.isVertexTable() : !schemaTable.isVertexTable()) {
+            if (returnVertices ? schemaTable.isVertexTable() : schemaTable.isEdgeTable()) {
                 StringBuilder sql = new StringBuilder("SELECT COUNT(1) FROM ");
                 sql.append("\"");
                 sql.append(schemaTable.getSchema());
@@ -1136,7 +1136,7 @@ public class SqlgGraph implements Graph {
             Set<String> tables = this.getSchemaManager().getAllTables().keySet();
             for (String table : tables) {
                 SchemaTable schemaTable = SchemaTable.from(this, table, this.getSqlDialect().getPublicSchema());
-                if (returnVertices ? schemaTable.isVertexTable() : !schemaTable.isVertexTable()) {
+                if (returnVertices ? schemaTable.isVertexTable() : schemaTable.isEdgeTable()) {
                     StringBuilder sql = new StringBuilder("SELECT * FROM ");
                     sql.append("\"");
                     sql.append(schemaTable.getSchema());

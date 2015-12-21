@@ -107,7 +107,7 @@ public class SchemaTable implements DataSerializable, Serializable {
     }
 
     public boolean isEdgeTable() {
-        return !isVertexTable();
+        return this.table.startsWith(SchemaManager.EDGE_PREFIX);
     }
 
     public SchemaTable withOutPrefix() {
